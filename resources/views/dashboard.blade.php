@@ -1,8 +1,6 @@
-// routes/web.p
+
 use App\Http\Controllers\BookingController;
 Route::resource('bookings', BookingController::class);
-
-// app/Models/Booking.php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,7 +23,7 @@ public function up()
         $table->timestamps();
     });
 }
-// app/Http/Controllers/BookingController.php
+//app/Http/Controllers/BookingController.php
 namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
@@ -69,7 +67,7 @@ class BookingController extends Controller
     }
 }
 
-// resources/views/layouts/ap
+// resources/views/layouts/app
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,8 +78,6 @@ class BookingController extends Controller
 <body class="bg-gray-100">
 
 <div class="flex">
-
-<!-- Sidebar -->
 <div class="w-64 h-screen bg-white shadow p-5">
 <h2 class="text-xl font-bold mb-6">Hotelify</h2>
 <ul class="space-y-4 text-gray-600">

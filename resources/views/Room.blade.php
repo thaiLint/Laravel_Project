@@ -19,12 +19,12 @@
     <img src="{{ asset('storage/'.$room->image) }}" 
          class="w-full h-44 object-cover">
 
-    <!-- Content -->
+    
     <div class="p-4">
         <h2 class="text-lg font-bold">Room {{ $room->room_number }}</h2>
         <p class="text-gray-500 text-sm">{{ $room->type }}</p>
 
-        <!-- Price + Status -->
+        
         <div class="flex justify-between items-center mt-3">
             <span class="text-green-500 font-semibold">
                 ${{ $room->300 }}
