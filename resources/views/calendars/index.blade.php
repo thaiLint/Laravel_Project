@@ -1,4 +1,6 @@
 
+@extends('layouts.app')
+@section('content')
 <div class="p-6 bg-gray-100 min-h-screen">
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
@@ -24,7 +26,8 @@
         <!-- Calendar Grid -->
         <div class="grid grid-cols-7 gap-2 text-center">
             <!-- Days -->
-            @foreach(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] as $day)
+            @foreach(['Sun','Mon','Tue','Wed','Thu'
+            ,'Fri','Sat'] as $day)
                 <div class="font-semibold text-gray-500">{{ $day }}</div>
             @endforeach
             <!-- Dates -->
@@ -105,5 +108,6 @@
             <p class="text-sm">Booking cancelled</p>
         </div>
     </div>
+
 </div>
 @endsection
