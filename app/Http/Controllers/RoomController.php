@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
+=======
 use App\Models\Room;
+>>>>>>> 257f029041865ecc286816787e838c779ce2fdee
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+<<<<<<< HEAD
+    public function index()
+    {
+        return view('rooms.index');
+    }
+}
+=======
     /**
      * Display a listing of the resource.
      */
@@ -63,3 +73,4 @@ class RoomController extends Controller
         //
     }
 }
+>>>>>>> 257f029041865ecc286816787e838c779ce2fdee
