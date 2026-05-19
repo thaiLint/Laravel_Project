@@ -32,7 +32,8 @@
         <div class="grid grid-cols-7 gap-2 text-center">
 
             <!-- Days -->
-            @foreach(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] as $day)
+            @foreach(['Sun','Mon','Tue','Wed','Thu'
+            ,'Fri','Sat'] as $day)
                 <div class="font-semibold text-gray-500">{{ $day }}</div>
             @endforeach
 
