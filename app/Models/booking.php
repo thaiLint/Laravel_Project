@@ -15,4 +15,10 @@ class Booking extends Model
         'check_in',
         'check_out'
     ];
+    public function index()
+{
+    $booking = Booking::all();
+
+    return view('bookings.index', compact('bookings'));
+}
 }

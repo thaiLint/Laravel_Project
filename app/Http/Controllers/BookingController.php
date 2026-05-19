@@ -4,25 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Booking;
+
 class BookingController extends Controller
 {
     public function index()
     {
-        return view('Booking.index');
+        $bookings = Booking::all();
+        return view('bookings.index', compact('bookings'));
     }
 
     public function create()
     {
-        return view('Booking.create');
+        return view('bookings.create');
     }
 
     public function edit($id)
     {
-        return view('Booking.update');
+        $booking = Booking::findOrFail($id);
+        return view('bookings.edit', compact('booking'));
     }
 
     public function destroy($id)
     {
-        return view('Booking.delete');
+        Booking::findOrFail($id)->delete();
+        return redirect()->route('bookings.index');
     }
 }

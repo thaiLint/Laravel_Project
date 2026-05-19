@@ -1,4 +1,6 @@
 
+@extends('layouts.app')
+@section('content')
 <div class="p-6 bg-gray-100 min-h-screen">
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
@@ -106,5 +108,6 @@
             <p class="text-sm">Booking cancelled</p>
         </div>
     </div>
+
 </div>
 @endsection
