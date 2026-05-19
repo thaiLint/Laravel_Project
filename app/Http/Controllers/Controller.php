@@ -13,7 +13,4 @@ class Controller extends BaseController
 }
 
 //Route::get('/', [HomeController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/calendar', [CalendarController::class, 'index']);
-Route::get('/customer', [CustomerController::class, 'index']);
-//Route::get('/room', [RoomController::class, 'index']);
+
