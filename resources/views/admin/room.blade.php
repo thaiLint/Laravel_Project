@@ -23,12 +23,13 @@
             color:white;
         }
 
-        .btn{
-            padding:10px 15px;
-            background:#2563eb;
+        .add-btn{
+             background:#2563eb;
             color:white;
-            text-decoration:none;
+            padding:12px 20px;
+            border:none;
             border-radius:5px;
+            text-decoration:none;
         }
 
     </style>
@@ -36,7 +37,10 @@
 <body>
     <h1>Room Management</h1>
     <br>
-    <a href="" class="btn">Add Room</a>
+   
+                <a href="" class="add-btn">
+                    + Add room
+                </a>
     <br><br>
     <table>
         <tr>

@@ -67,7 +67,7 @@
             <a href="">Home</a>
             <a href="">Rooms</a>
             <a href="">Booking</a>
-            <a href="">Dashboard</a>
+            <a href="/admin/dashboard">Dashboard</a>
         </div>
     </div>
     <div class="hero">
