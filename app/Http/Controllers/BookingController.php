@@ -1,11 +1,28 @@
-public function edit($id)
-{
-    $booking = Booking::findOrFail($id);
-    return view('booking.update', compact('booking'));
-}
+<?php
 
-public function destroy($id)
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class BookingController extends Controller
 {
-    $booking = Booking::findOrFail($id);
-    return view('booking.delete', compact('booking'));
+    public function index()
+    {
+        return view('Booking.index');
+    }
+
+    public function create()
+    {
+        return view('Booking.create');
+    }
+
+    public function edit($id)
+    {
+        return view('Booking.update');
+    }
+
+    public function destroy($id)
+    {
+        return view('Booking.delete');
+    }
 }

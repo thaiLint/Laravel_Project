@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,8 +15,7 @@ class CustomerController extends Controller
     {
         return view('Customer.create');
     }
-
-    public function edit($id)
+     public function edit($id)
     {
         return view('Customer.update');
     }
