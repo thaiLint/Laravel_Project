@@ -46,7 +46,7 @@
             <div class="d-flex gap-3 align-items-center">
                 <input type="text" class="form-control search-input" id="searchInput" placeholder="Search customer...">
                 <a href="{{ route('customers.create') }}" class="btn btn-add px-4">
-                    <i class="bi bi-plus-lg me-1"></i> + Add Customer
+                    <i class="bi bi-plus-lg me-1"></i> Add Customer
                 </a>
             </div>
         </div>

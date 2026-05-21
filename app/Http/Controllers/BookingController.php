@@ -21,10 +21,14 @@ class BookingController extends Controller
     ));
 }
 
-    public function create()
-    {
-        return view('bookings.create');
-    }
+
+public function create()
+{
+    $customers = Customer::all();
+    $rooms = Room::all();
+
+    return view('bookings.create', compact('customers', 'rooms'));
+}
 
     public function edit($id)
     {

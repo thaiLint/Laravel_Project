@@ -53,7 +53,7 @@
                 <div class="col-md-6">
                     <label class="form-label">Room Number <span class="text-danger">*</span></label>
                     <input type="text" name="room_number" class="form-control @error('room_number') is-invalid @enderror"
-                           value="{{ old('room_number') }}" placeholder="e.g. 101">
+                           value="{{ old('room_number') }}">
                     @error('room_number')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-6">
@@ -75,21 +75,21 @@
                     <label class="form-label">Price / Night ($) <span class="text-danger">*</span></label>
                     <input type="number" name="price_per_night" step="0.01" min="0"
                            class="form-control @error('price_per_night') is-invalid @enderror"
-                           value="{{ old('price_per_night') }}" placeholder="e.g. 99.99">
+                           value="{{ old('price_per_night') }}">
                     @error('price_per_night')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Capacity <span class="text-danger">*</span></label>
                     <input type="number" name="capacity" min="1"
                            class="form-control @error('capacity') is-invalid @enderror"
-                           value="{{ old('capacity') }}" placeholder="e.g. 2">
+                           value="{{ old('capacity') }}">
                     @error('capacity')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Floor <span class="text-danger">*</span></label>
                     <input type="number" name="floor" min="1"
                            class="form-control @error('floor') is-invalid @enderror"
-                           value="{{ old('floor') }}" placeholder="e.g. 3">
+                           value="{{ old('floor') }}" >
                     @error('floor')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>

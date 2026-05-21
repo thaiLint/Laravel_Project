@@ -55,13 +55,13 @@
             <div class="col-md-6">
                 <label class="form-label">Full Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                       value="{{ old('name') }}" placeholder="e.g. John Doe">
+                       value="{{ old('name') }}" >
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="col-md-6">
                 <label class="form-label">Email <span class="text-danger">*</span></label>
                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                       value="{{ old('email') }}" placeholder="e.g. john@email.com">
+                       value="{{ old('email') }}" >
                 @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
         </div>
@@ -70,7 +70,7 @@
             <div class="col-md-6">
                 <label class="form-label">Phone <span class="text-danger">*</span></label>
                 <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
-                       value="{{ old('phone') }}" placeholder="e.g. 012345678">
+                       value="{{ old('phone') }}" >
                 @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="col-md-6">
