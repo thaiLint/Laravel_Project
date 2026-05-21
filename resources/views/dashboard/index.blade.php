@@ -1,81 +1,127 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Dashboard</title>
 
-@section('content')
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="topbar">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <input type="text" placeholder="Search..." class="search">
+    <style>
 
-    <div class="profile">
-        <img src="https://i.pinimg.com/736x/3a/df/b8/3adfb8ae9f81e08ba95be604944e22b6.jpg">
-        <h3>Admin</h3>
+
+    </style>
+</head>
+<body>
+
+<div class="container-fluid dashboard">
+
+    <!-- Top -->
+    <div class="topbar">
+
+        <div class="search-box">
+            <input type="text" class="form-control" placeholder="Search...">
+        </div>
+
+        <div class="admin">
+            <img src="https://i.pravatar.cc/100" alt="">
+            <span>Admin</span>
+        </div>
+
     </div>
 
-</div>
+    <!-- Cards -->
+    <div class="row g-4">
 
-<div class="cards">
+        <div class="col-lg-4 col-md-6">
+            <div class="stats-card">
 
-    <div class="card">
-        <div class="card-top">Total Rooms</div>
-        <div class="card-body"><h1>50</h1></div>
+                <div class="stats-header">
+                    Total Rooms
+                </div>
+
+                <div class="stats-body">
+                    <div class="stats-number">50</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="stats-card">
+
+                <div class="stats-header">
+                    Customers
+                </div>
+
+                <div class="stats-body">
+                    <div class="stats-number">120</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+            <div class="stats-card">
+
+                <div class="stats-header">
+                    Bookings
+                </div>
+
+                <div class="stats-body">
+                    <div class="stats-number">89</div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
-    <div class="card">
-        <div class="card-top">Customers</div>
-        <div class="card-body"><h1>120</h1></div>
-    </div>
+    <!-- Charts -->
+    <div class="row mt-4 g-4">
 
-    <div class="card">
-        <div class="card-top">Bookings</div>
-        <div class="card-body"><h1>89</h1></div>
-    </div>
+        <div class="col-lg-8">
 
-</div>
+            <div class="chart-card">
 
-<div class="content">
+                <div class="chart-title">
+                    Monthly Revenue
+                </div>
 
-    <div>
+                <div class="bars">
 
-        <div class="chart-box">
+                    <div class="bar" style="height:60px;"></div>
+                    <div class="bar" style="height:100px;"></div>
+                    <div class="bar" style="height:130px;"></div>
+                    <div class="bar" style="height:170px;"></div>
+                    <div class="bar" style="height:150px;"></div>
+                    <div class="bar" style="height:210px;"></div>
+                    <div class="bar" style="height:250px;"></div>
 
-            <h3>Monthly Revenue</h3>
+                </div>
 
-            <div class="chart">
-                <div class="bar" style="height:40px;"></div>
-                <div class="bar" style="height:80px;"></div>
-                <div class="bar" style="height:100px;"></div>
-                <div class="bar" style="height:140px;"></div>
-                <div class="bar" style="height:120px;"></div>
-                <div class="bar" style="height:180px;"></div>
-                <div class="bar" style="height:220px;"></div>
             </div>
 
         </div>
 
-        <div class="tasks">
+        <div class="col-lg-4">
 
-            <h3>Hotel Tasks</h3>
+            <div class="chart-card">
 
-            <div class="task-grid">
-
-                <div class="task-item">
-                    <span>Clean VIP Room</span>
-                    <input type="checkbox">
+                <div class="chart-title">
+                    Booking Stats
                 </div>
 
-                <div class="task-item">
-                    <span>Customer Checkout</span>
-                    <input type="checkbox">
-                </div>
+                <div class="bars justify-content-center">
 
-                <div class="task-item">
-                    <span>Room Inspection</span>
-                    <input type="checkbox">
-                </div>
+                    <div class="bar" style="height:100px;"></div>
+                    <div class="bar" style="height:160px;"></div>
+                    <div class="bar" style="height:220px;"></div>
 
-                <div class="task-item">
-                    <span>Payment Update</span>
-                    <input type="checkbox">
                 </div>
 
             </div>
@@ -84,20 +130,31 @@
 
     </div>
 
-    <div class="small-card">
+    <!-- Tasks -->
+    <div class="task-card">
 
-        <h3>Booking Stats</h3>
+        <div class="task-title">
+            Hotel Tasks
+        </div>
 
-        <div class="small-chart">
+        <div class="task-item">
+            <span>Clean VIP Room</span>
+            <input type="checkbox">
+        </div>
 
-            <div class="small-bar" style="height:80px;"></div>
-            <div class="small-bar" style="height:140px;"></div>
-            <div class="small-bar" style="height:180px;"></div>
+        <div class="task-item">
+            <span>Customer Checkout</span>
+            <input type="checkbox">
+        </div>
 
+        <div class="task-item">
+            <span>Prepare Breakfast</span>
+            <input type="checkbox">
         </div>
 
     </div>
 
 </div>
 
-@endsection
+</body>
+</html>
