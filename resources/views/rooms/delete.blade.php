@@ -1,92 +1,86 @@
-@extends('layout')
+{{--
+  NOTE: In a typical Laravel resource setup, delete is handled directly
+  from index.blade.php via a form with @method('DELETE').
+  This file provides a dedicated confirmation page if you prefer a separate step.
+  Route: GET /rooms/{id}/delete  →  rooms.delete (optional)
+--}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Room</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f0f4f8; }
+        .card { border: none; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+        .icon-danger { font-size: 3.5rem; color: #dc3545; }
+        .detail-row { background: #f8f9fa; border-radius: 8px; padding: 10px 16px; margin-bottom: 8px; }
+        .detail-label { font-weight: 600; color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .detail-value { font-weight: 500; color: #222; }
+        .btn-confirm-delete { background-color: #dc3545; color: #fff; border-radius: 8px; font-weight: 600; padding: 10px 30px; }
+        .btn-confirm-delete:hover { background-color: #b02a37; color: #fff; }
+        .btn-cancel { border-radius: 8px; padding: 10px 30px; font-weight: 600; }
+    </style>
+</head>
+<body>
 
-@section('title', 'Delete Room')
+<div class="container py-5">
+    <div class="card p-5 text-center" style="max-width: 540px; margin: auto;">
 
-@section('breadcrumb')
-    <a href="#">Dashboard</a>
-    <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
-    <a href="{{ route('rooms.index') }}">Rooms</a>
-    <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
-    <span>Delete Room</span>
-@endsection
-
-@section('content')
-
-<div style="max-width:600px; margin:auto;">
-
-    <div class="card" style="text-align:center; padding:40px;">
-
-        <div style="margin-bottom:20px;">
-
-            <i class="fa-solid fa-trash"
-            style="font-size:70px; color:#ef4444;"></i>
-
+        <div class="mb-3">
+            <i class="bi bi-exclamation-triangle-fill icon-danger"></i>
         </div>
 
-        <h1 class="section-title" style="margin-bottom:10px;">
-            Delete Room
-        </h1>
+        <h4 class="fw-bold mb-1">Delete Room?</h4>
+        <p class="text-muted mb-4">This action cannot be undone. The room below will be permanently removed.</p>
 
-        <p style="color:#94a3b8; margin-bottom:30px;">
-
-            Are you sure you want to delete this room?
-
-        </p>
-
-        <div style="background:#f8fafc;
-        border-radius:12px;
-        padding:20px;
-        margin-bottom:30px;">
-
-            <img src="{{ $room->photo }}"
-            width="180"
-            height="120"
-            style="border-radius:12px;
-            object-fit:cover;
-            margin-bottom:15px;">
-
-            <h3 style="margin-bottom:6px;">
-                {{ $room->name }}
-            </h3>
-
-            <p style="color:#64748b;">
-                {{ $room->type }}
-            </p>
-
+        {{-- Room Details Summary --}}
+        <div class="text-start mb-4">
+            <div class="detail-row d-flex justify-content-between">
+                <span class="detail-label">Room Number</span>
+                <span class="detail-value">{{ $room->room_number }}</span>
+            </div>
+            <div class="detail-row d-flex justify-content-between">
+                <span class="detail-label">Type</span>
+                <span class="detail-value">{{ $room->type }}</span>
+            </div>
+            <div class="detail-row d-flex justify-content-between">
+                <span class="detail-label">Floor</span>
+                <span class="detail-value">Floor {{ $room->floor }}</span>
+            </div>
+            <div class="detail-row d-flex justify-content-between">
+                <span class="detail-label">Status</span>
+                <span class="detail-value">
+                    @if($room->status === 'Available')
+                        <span class="badge bg-success">Available</span>
+                    @elseif($room->status === 'Booked')
+                        <span class="badge bg-danger">Booked</span>
+                    @else
+                        <span class="badge bg-warning text-dark">Maintenance</span>
+                    @endif
+                </span>
+            </div>
         </div>
 
-        <div style="display:flex;
-        justify-content:center;
-        gap:10px;">
-
-            <form action="{{ route('rooms.destroy', $room) }}"
-            method="POST">
-
-                @csrf
-                @method('DELETE')
-
-                <button type="submit"
-                class="btn-danger">
-
-                    <i class="fa-solid fa-trash"></i>
-
-                    Delete
-
+        {{-- Confirm Delete Form --}}
+        <form action="{{ route('rooms.destroy', $room->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ route('rooms.index') }}" class="btn btn-outline-secondary btn-cancel">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-confirm-delete">
+                    <i class="bi bi-trash-fill me-1"></i> Yes, Delete
                 </button>
-
-            </form>
-
-            <a href="{{ route('rooms.index') }}"
-            class="btn-secondary">
-
-                Cancel
-
-            </a>
-
-        </div>
+            </div>
+        </form>
 
     </div>
-
 </div>
 
-@endsection
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

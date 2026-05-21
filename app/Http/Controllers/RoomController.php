@@ -10,11 +10,11 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $rooms = Room::all();
-        return view('rooms.index', compact('rooms'));
-    }
+   public function index()
+{
+    $rooms = Room::paginate(10); 
+    return view('rooms.index', compact('rooms'));
+}
 
     
     public function create()

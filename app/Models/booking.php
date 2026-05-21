@@ -15,10 +15,11 @@ class Booking extends Model
         'check_in',
         'check_out'
     ];
-    public function index()
-{
-    $booking = Booking::all();
+public function customer() {
+    return $this->belongsTo(Customer::class);
+}
 
-    return view('bookings.index', compact('bookings'));
+public function room() {
+    return $this->belongsTo(Room::class);
 }
 }
