@@ -6,6 +6,7 @@
     <title>@yield('title', 'Hotel Admin')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+     @vite('resources/css/app.css')
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Arial,sans-serif; }
         body { background:#f1f5f9; display:flex; }
@@ -142,6 +143,11 @@
         <li>
             <a href="{{ route('bookings.index') }}" class="{{ request()->routeIs('bookings.*') ? 'active' : '' }}">
                 <i class="bi bi-calendar2-check-fill"></i> Booking
+            </a>
+        </li>
+         <li>
+            <a href="{{ route('calendars.index') }}" class="{{ request()->routeIs('calendars.*') ? 'active' : '' }}">
+                <i class="bi bi-calendar2-check-fill"></i> Calendar
             </a>
         </li>
     </ul>
