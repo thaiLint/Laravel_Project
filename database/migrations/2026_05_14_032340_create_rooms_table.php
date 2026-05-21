@@ -14,9 +14,7 @@ return new class extends Migration
     Schema::create('rooms', function (Blueprint $table) {
         $table->id();
         $table->string('room_number')->unique();
-        $table->string('type'); // Single, Double, VIP
-        $table->decimal('price', 10, 2);
-        $table->string('status')->default('available'); // available, booked, maintenance
+        $table->string('type'); 
         $table->text('description')->nullable();
         $table->timestamps();
     });
