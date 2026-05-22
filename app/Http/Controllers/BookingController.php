@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Customer;  // ← ADD THIS
+use App\Models\Room;      // ← ADD THIS
 
 use Illuminate\Http\Request;
 
