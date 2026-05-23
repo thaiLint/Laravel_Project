@@ -104,21 +104,53 @@
             <div class="col-md-6">
                 <label class="form-label">Booking Status <span class="text-danger">*</span></label>
                 <select name="status" class="form-select @error('status') is-invalid @enderror">
-                    @foreach(['Pending','Confirmed','Checked In','Checked Out','Cancelled'] as $s)
-                        <option value="{{ $s }}" {{ old('status', $booking->status) == $s ? 'selected' : '' }}>{{ $s }}</option>
-                    @endforeach
-                </select>
+
+    <option value="pending" {{ old('status', $booking->status) == 'pending' ? 'selected' : '' }}>
+        Pending
+    </option>
+
+    <option value="confirmed" {{ old('status', $booking->status) == 'confirmed' ? 'selected' : '' }}>
+        Confirmed
+    </option>
+
+    <option value="checked_in" {{ old('status', $booking->status) == 'checked_in' ? 'selected' : '' }}>
+        Checked In
+    </option>
+
+    <option value="checked_out" {{ old('status', $booking->status) == 'checked_out' ? 'selected' : '' }}>
+        Checked Out
+    </option>
+
+    <option value="cancelled" {{ old('status', $booking->status) == 'cancelled' ? 'selected' : '' }}>
+        Cancelled
+    </option>
+
+</select>
                 @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="col-md-6">
-                <label class="form-label">Payment Status <span class="text-danger">*</span></label>
-                <select name="payment_status" class="form-select @error('payment_status') is-invalid @enderror">
-                    @foreach(['Unpaid','Partial','Paid'] as $p)
-                        <option value="{{ $p }}" {{ old('payment_status', $booking->payment_status) == $p ? 'selected' : '' }}>{{ $p }}</option>
-                    @endforeach
-                </select>
-                @error('payment_status')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
+    <label class="form-label">Payment Status <span class="text-danger">*</span></label>
+
+    <select name="payment_status" class="form-select @error('payment_status') is-invalid @enderror">
+
+        <option value="unpaid" {{ old('payment_status', $booking->payment_status) == 'unpaid' ? 'selected' : '' }}>
+            Unpaid
+        </option>
+
+        <option value="partial" {{ old('payment_status', $booking->payment_status) == 'partial' ? 'selected' : '' }}>
+            Partial
+        </option>
+
+        <option value="paid" {{ old('payment_status', $booking->payment_status) == 'paid' ? 'selected' : '' }}>
+            Paid
+        </option>
+
+    </select>
+
+    @error('payment_status')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
         </div>
 
         <div class="mb-4">

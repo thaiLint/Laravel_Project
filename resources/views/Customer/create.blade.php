@@ -38,18 +38,22 @@
         <div class="section-divider">Customer Information</div>
 
         {{-- Photo Upload --}}
-        <div class="d-flex align-items-center gap-4 mb-4">
-            <div>
-                <div class="photo-placeholder" id="photoPlaceholder"><i class="bi bi-person"></i></div>
-                <img id="photoPreview" class="photo-preview" src="#" alt="Preview">
-            </div>
-            <div>
-                <label class="form-label">Profile Photo</label>
-                <input type="file" name="photo" class="form-control" id="photoInput"
-                       accept="image/*" style="width: 260px;">
-                <small class="text-muted">JPG, PNG up to 2MB</small>
-            </div>
+<div class="d-flex align-items-center gap-4 mb-4">
+    <div>
+        <div class="photo-placeholder" id="photoPlaceholder">
+            <i class="bi bi-person"></i>
         </div>
+
+        <img id="photoPreview" class="photo-preview" src="#" alt="Preview">
+    </div>
+
+    <div>
+        <label class="form-label">Profile Photo</label>
+        <input type="file" name="photo" class="form-control" id="photoInput"
+               accept="image/*" style="width: 260px;">
+        <small class="text-muted">JPG, PNG up to 2MB</small>
+    </div>
+</div>
 
         <div class="row g-3 mb-3">
             <div class="col-md-6">

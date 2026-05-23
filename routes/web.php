@@ -16,6 +16,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('customers', CustomerController::class);
 
+
 Route::resource('rooms', RoomController::class);
 
 Route::resource('bookings', BookingController::class);

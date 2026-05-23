@@ -71,15 +71,16 @@
                     <tr>
                         <td>{{ $customer->id }}</td>
                         <td>
-                            @if($customer->photo)
-                                <img src="{{ asset('storage/' . $customer->photo) }}"
-                                     class="customer-avatar" alt="{{ $customer->name }}">
-                            @else
-                                <div class="avatar-placeholder">
-                                    {{ strtoupper(substr($customer->name, 0, 1)) }}
-                                </div>
-                            @endif
-                        </td>
+    @if($customer->photo)
+        <img src="{{ asset('uploads/customer/' . $customer->photo) }}"
+             class="customer-avatar"
+             alt="{{ $customer->name }}">
+    @else
+        <div class="avatar-placeholder">
+            {{ strtoupper(substr($customer->name, 0, 1)) }}
+        </div>
+    @endif
+</td>
                         <td><strong>{{ $customer->name }}</strong></td>
                         <td>{{ $customer->email }}</td>
                         <td>{{ $customer->phone }}</td>
