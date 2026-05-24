@@ -84,17 +84,18 @@
                             @endif
                         </td>
                         <td>
-                            @if($booking->status === 'Confirmed')
-                                <span class="badge badge-confirmed rounded-pill px-3 py-2">Confirmed</span>
-                            @elseif($booking->status === 'Checked In')
-                                <span class="badge badge-checkedin rounded-pill px-3 py-2">Checked In</span>
-                            @elseif($booking->status === 'Checked Out')
-                                <span class="badge badge-checkedout rounded-pill px-3 py-2">Checked Out</span>
-                            @elseif($booking->status === 'Cancelled')
-                                <span class="badge badge-cancelled rounded-pill px-3 py-2">Cancelled</span>
-                            @else
-                                <span class="badge badge-pending rounded-pill px-3 py-2">Pending</span>
-                            @endif
+                       {{-- Status badge --}}
+@if($booking->status === 'Confirmed')
+    <span class="badge badge-confirmed rounded-pill px-3 py-2">Confirmed</span>
+@elseif($booking->status === 'Checked In')
+    <span class="badge badge-checkedin rounded-pill px-3 py-2">Checked In</span>
+@elseif($booking->status === 'Checked Out')
+    <span class="badge badge-checkedout rounded-pill px-3 py-2">Checked Out</span>
+@elseif($booking->status === 'Cancelled')
+    <span class="badge badge-cancelled rounded-pill px-3 py-2">Cancelled</span>
+@else
+    <span class="badge badge-pending rounded-pill px-3 py-2">Pending</span>
+@endif
                         </td>
                         <td>
                             <a href="{{ route('bookings.edit', $booking->id) }}" class="btn btn-warning btn-sm px-3">
@@ -104,7 +105,7 @@
                                   class="d-inline" onsubmit="return confirm('Delete this booking?')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm px-3">
-                                    <i class="bi bi-trash-fill"></i> Delete
+                                    <i class="bi bi-trash-fill"></i> Cancel
                                 </button>
                             </form>
                         </td>
