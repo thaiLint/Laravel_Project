@@ -280,6 +280,11 @@
             padding: 28px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.07);
         }
+        .badge-confirmed  { background-color: #1a73e8; color: #fff; } /* Blue */
+        .badge-checkedin  { background-color: #28a745; color: #fff; } /* Green */
+        .badge-checkedout { background-color: #6c757d; color: #fff; } /* Gray */
+        .badge-cancelled  { background-color: #dc3545; color: #fff; } /* Red */
+        .badge-pending    { background-color: #ffc107; color: #000; } /* Yellow */
 
         /* Table */
         .table thead { background-color: #1a73e8; color: white; }
@@ -358,7 +363,12 @@
         </li>
          <li>
             <a href="{{ route('calendars.index') }}" class="{{ request()->routeIs('calendars.*') ? 'active' : '' }}">
-                <i class="bi bi-calendar2-check-fill"></i> Calendar
+                <i class="bi bi-calendar-day-fill"></i> Calendar
+            </a>
+        </li>
+          <li>
+            <a href="{{ route('payments.index') }}" class="{{ request()->routeIs('payments.*') ? 'active' : '' }}">
+                <i class="bi bi-credit-card-fill"></i> Payments
             </a>
         </li>
     </ul>

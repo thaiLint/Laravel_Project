@@ -130,8 +130,7 @@
 
         <div class="mb-4">
             <label class="form-label">Special Requests / Notes</label>
-            <textarea name="notes" rows="3" class="form-control"
-                      placeholder="e.g. Late check-in, extra bed...">{{ old('notes') }}</textarea>
+            <textarea name="notes" rows="3" class="form-control">{{ old('notes') }}</textarea>
         </div>
 
         <div class="d-flex justify-content-end gap-2">

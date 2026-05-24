@@ -170,10 +170,10 @@
                         <div class="mb-3">
                             <label class="form-label">Payment Method <span class="text-danger">*</span></label>
                             <select name="method" class="form-select">
-                                <option value="Cash">💵 Cash</option>
-                                <option value="Credit Card">💳 Credit Card</option>
-                                <option value="Bank Transfer">🏦 Bank Transfer</option>
-                                <option value="Online">📱 Online</option>
+                                <option value="Cash"> Cash</option>
+                                <option value="Credit Card"> Credit Card</option>
+                                <option value="Bank Transfer"> Bank Transfer</option>
+                                <option value="Online">Online</option>
                             </select>
                         </div>
 
@@ -181,8 +181,8 @@
                         <div class="mb-3">
                             <label class="form-label">Payment Status <span class="text-danger">*</span></label>
                             <select name="payment_status" class="form-select">
-                                <option value="Paid">✅ Paid (Full)</option>
-                                <option value="Partial">⚠️ Partial</option>
+                                <option value="Paid"> Paid (Full)</option>
+                                <option value="Partial"> Partial</option>
                             </select>
                         </div>
 
@@ -190,14 +190,14 @@
                         <div class="mb-3">
                             <label class="form-label">Transaction ID <span class="text-muted small">(optional)</span></label>
                             <input type="text" name="transaction_id" class="form-control"
-                                   placeholder="e.g. TXN-20260524">
+                                 >
                         </div>
 
                         {{-- Notes --}}
                         <div class="mb-1">
                             <label class="form-label">Notes <span class="text-muted small">(optional)</span></label>
                             <textarea name="notes" rows="2" class="form-control"
-                                      placeholder="Any additional notes..."></textarea>
+                                    ></textarea>
                         </div>
 
                     </div>
