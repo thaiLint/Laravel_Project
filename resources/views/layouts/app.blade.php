@@ -367,7 +367,7 @@
             </a>
         </li>
           <li>
-            <a href="{{ route('calendars.index') }}" class="{{ request()->routeIs('calendars.*') ? 'active' : '' }}">
+            <a href="{{ route('payments.index') }}" class="{{ request()->routeIs('payments.*') ? 'active' : '' }}">
                 <i class="bi bi-credit-card-fill"></i> Payments
             </a>
         </li>
