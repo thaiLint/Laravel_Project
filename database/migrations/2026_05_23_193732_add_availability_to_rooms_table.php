@@ -11,20 +11,15 @@ return new class extends Migration
      */
    public function up(): void
 {
-    Schema::table('customers', function (Blueprint $table) {
-        //$table->string('status')->default('active');
+    Schema::table('rooms', function (Blueprint $table) {
+        $table->string('availability')->default('available');
     });
 }
 
 public function down(): void
 {
-    Schema::table('customers', function (Blueprint $table) {
-        $table->dropColumn('status');
+    Schema::table('rooms', function (Blueprint $table) {
+        $table->dropColumn('availability');
     });
 }
-
-    /**
-     * Reverse the migrations.
-     */
-    
 };

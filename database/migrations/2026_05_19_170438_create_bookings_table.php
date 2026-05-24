@@ -12,29 +12,29 @@ return new class extends Migration
    public function up(): void
 {
     Schema::create('bookings', function (Blueprint $table) {
-        $table->id();
+    $table->id();
 
-        // RELATIONS
-        $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-        $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
+    $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+    $table->foreignId('room_id')->constrained()->onDelete('cascade');
 
-        // BOOKING INFO
-        $table->date('check_in');
-        $table->date('check_out');
-        $table->time('check_in_time')->nullable();
-        $table->time('check_out_time')->nullable();
+    $table->date('check_in');
+    $table->date('check_out');
 
-        $table->integer('guests')->default(1);
+    $table->time('check_in_time')->nullable();
+    $table->time('check_out_time')->nullable();
 
-        $table->string('status')->default('pending');
-        // pending / confirmed / cancelled
+    $table->integer('guests')->default(1);
 
-        $table->decimal('total_price', 10, 2)->nullable();
+    $table->string('status')->default('pending');
 
-        $table->text('notes')->nullable();
+    $table->string('payment_status')->default('unpaid');
 
-        $table->timestamps();
-    });
+    $table->decimal('total_price', 10, 2)->nullable();
+
+    $table->text('notes')->nullable();
+
+    $table->timestamps();
+});
 }
 
     /**

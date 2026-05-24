@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
-    protected $fillable = [
+   protected $fillable = [
+        'photo',
         'name',
         'email',
         'phone',
+        'room',
         'status',
         'address'
     ];

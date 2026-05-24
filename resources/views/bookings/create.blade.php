@@ -100,24 +100,33 @@
         <div class="section-divider">Status & Payment</div>
         <div class="row g-3 mb-3">
             <div class="col-md-6">
-                <label class="form-label">Booking Status <span class="text-danger">*</span></label>
-                <select name="status" class="form-select @error('status') is-invalid @enderror">
-                    @foreach(['Pending','Confirmed','Checked In','Checked Out','Cancelled'] as $s)
-                        <option value="{{ $s }}" {{ old('status') == $s ? 'selected' : '' }}>{{ $s }}</option>
-                    @endforeach
-                </select>
-                @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Payment Status <span class="text-danger">*</span></label>
-                <select name="payment_status" class="form-select @error('payment_status') is-invalid @enderror">
-                    @foreach(['Unpaid','Partial','Paid'] as $p)
-                        <option value="{{ $p }}" {{ old('payment_status') == $p ? 'selected' : '' }}>{{ $p }}</option>
-                    @endforeach
-                </select>
-                @error('payment_status')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
-        </div>
+    <label class="form-label">Booking Status <span class="text-danger">*</span></label>
+
+    <select name="status" class="form-select @error('status') is-invalid @enderror">
+        <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+        <option value="confirmed" {{ old('status') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+        <option value="checked_in" {{ old('status') == 'checked_in' ? 'selected' : '' }}>Checked In</option>
+        <option value="checked_out" {{ old('status') == 'checked_out' ? 'selected' : '' }}>Checked Out</option>
+        <option value="cancelled" {{ old('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+    </select>
+
+    @error('status')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+           <div class="col-md-6">
+    <label class="form-label">Payment Status <span class="text-danger">*</span></label>
+
+    <select name="payment_status" class="form-select @error('payment_status') is-invalid @enderror">
+        <option value="unpaid" {{ old('payment_status') == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
+        <option value="partial" {{ old('payment_status') == 'partial' ? 'selected' : '' }}>Partial</option>
+        <option value="paid" {{ old('payment_status') == 'paid' ? 'selected' : '' }}>Paid</option>
+    </select>
+
+    @error('payment_status')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
 
         <div class="mb-4">
             <label class="form-label">Special Requests / Notes</label>
@@ -161,5 +170,36 @@
             info.style.display = 'flex';
         } else { info.style.display = 'none'; }
     });
+
+const roomSelect = document.getElementById('roomSelect');
+const checkIn = document.getElementById('check_in');
+const checkOut = document.getElementById('check_out');
+const totalPrice = document.getElementById('totalPrice');
+
+function calculatePrice() {
+    const selectedRoom = roomSelect.options[roomSelect.selectedIndex];
+    const pricePerNight = parseFloat(selectedRoom?.dataset.price || 0);
+
+    const inDate = new Date(checkIn.value);
+    const outDate = new Date(checkOut.value);
+
+    if (!pricePerNight || !checkIn.value || !checkOut.value) {
+        totalPrice.value = '';
+        return;
+    }
+
+    const diffTime = outDate - inDate;
+    const nights = diffTime / (1000 * 60 * 60 * 24);
+
+    if (nights > 0) {
+        totalPrice.value = '$' + (nights * pricePerNight).toFixed(2);
+    } else {
+        totalPrice.value = '';
+    }
+}
+
+roomSelect.addEventListener('change', calculatePrice);
+checkIn.addEventListener('change', calculatePrice);
+checkOut.addEventListener('change', calculatePrice);
 </script>
 @endpush

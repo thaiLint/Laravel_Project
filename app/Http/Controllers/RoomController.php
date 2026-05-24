@@ -26,10 +26,13 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'room_number' => 'required',
-            'type' => 'required',
-            'price' => 'required|numeric',
-        ]);
+    'room_number' => 'required',
+    'type' => 'required',
+    'price_per_night' => 'required|numeric',
+    'capacity' => 'required|integer',
+    'floor' => 'required|integer',
+    'status' => 'required',
+]);
 
         Room::create($request->all());
 
@@ -53,10 +56,13 @@ class RoomController extends Controller
     public function update(Request $request, Room $room)
     {
         $request->validate([
-            'room_number' => 'required',
-            'type' => 'required',
-            'price' => 'required|numeric',
-        ]);
+    'room_number' => 'required',
+    'type' => 'required',
+    'price_per_night' => 'required|numeric',
+    'capacity' => 'required|integer',
+    'floor' => 'required|integer',
+    'status' => 'required',
+]);
 
         $room->update($request->all());
 

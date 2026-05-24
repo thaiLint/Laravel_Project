@@ -327,6 +327,7 @@
             .main { margin-left: 0; }
             body { flex-direction: column; }
         }
+
     </style>
     @stack('styles')
 </head>

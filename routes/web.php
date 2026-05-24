@@ -16,9 +16,12 @@ Route::get('/dashboard', function () {
 
 Route::resource('customers', CustomerController::class);
 
+
 Route::resource('rooms', RoomController::class);
 
 Route::resource('bookings', BookingController::class);
+Route::put('/bookings/{id}', [BookingController::class, 'update'])
+    ->name('bookings.update');
 
 Route::get('/calendars', [CalendarController::class, 'index'])
     ->name('calendars.index');
