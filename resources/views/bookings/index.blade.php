@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    {{-- Summary Stats --}}
+    
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
             <div class="summary-card" style="background:linear-gradient(135deg,#1a73e8,#4a9df8);">
@@ -84,7 +84,7 @@
                             @endif
                         </td>
                         <td>
-                       {{-- Status badge --}}
+                       
 @if($booking->status === 'Confirmed')
     <span class="badge badge-confirmed rounded-pill px-3 py-2">Confirmed</span>
 @elseif($booking->status === 'Checked In')

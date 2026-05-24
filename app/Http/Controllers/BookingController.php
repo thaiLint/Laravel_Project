@@ -6,57 +6,32 @@ use App\Models\Customer;
 use App\Models\Room;
 use App\Models\Booking;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-   public function index(Request $request)
+    public function index()
     {
-        $currentMonth = $request->filled('month')
-            ? Carbon::parse($request->month)->startOfMonth()
-            : Carbon::now()->startOfMonth();
+        $bookings = Booking::with(['customer', 'room'])->paginate(10);
 
-        $rawBookings = Booking::with(['customer', 'room'])
-            ->whereYear('check_in', $currentMonth->year)
-            ->whereMonth('check_in', $currentMonth->month)
-            ->orderBy('check_in')
-            ->get();
+        $totalBookings = Booking::count();
+        $checkedIn = Booking::where('status', 'checked_in')->count();
+        $pending = Booking::where('status', 'pending')->count();
+        $cancelled = Booking::where('status', 'cancelled')->count();
 
-        $bookings = [];
-
-        foreach ($rawBookings as $b) {
-            $day = Carbon::parse($b->check_in)->day;
-
-            $bookings[$day][] = [
-                'id' => $b->id,
-                'name' => $b->customer->name ?? 'Guest',
-                'room' => $b->room->room_number ?? '',
-                'time' => $b->check_in_time,
-                'status' => $b->status,
-            ];
-        }
-
-        
-        $editBooking = null;
-
-        if ($request->filled('edit')) {
-            $editBooking = Booking::with(['customer', 'room'])
-                ->find($request->edit);
-        }
-
-        
-        return view('calendars.index', [
-            'bookings' => $bookings,
-            'currentMonth' => $currentMonth,
-            'editBooking' => $editBooking,
-        ]);
+        return view('bookings.index', compact(
+            'bookings',
+            'totalBookings',
+            'checkedIn',
+            'pending',
+            'cancelled'
+        ));
     }
 
     public function create()
     {
         $customers = Customer::all();
 
-        
+        // only available rooms
         $rooms = Room::where('availability', 'available')->get();
 
         return view('bookings.create', compact('customers', 'rooms'));
