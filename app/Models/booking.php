@@ -9,16 +9,15 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'customer_name',
-        'room_number',
-        'check_in',
-        'check_out'
-    ];
-    public function index()
-{
-    $booking = Booking::all();
+   protected $fillable = [
+    'customer_id', 'room_id', 'check_in', 'check_out',
+    'guests', 'status', 'payment_status', 'notes','availability', 'total_price'
+];
+public function customer() {
+    return $this->belongsTo(Customer::class);
+}
 
-    return view('bookings.index', compact('bookings'));
+public function room() {
+    return $this->belongsTo(Room::class);
 }
 }

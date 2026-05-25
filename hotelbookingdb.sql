@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2026 at 08:29 PM
+-- Generation Time: May 24, 2026 at 06:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,11 +37,19 @@ CREATE TABLE `bookings` (
   `check_out_time` time DEFAULT NULL,
   `guests` int(11) NOT NULL DEFAULT 1,
   `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `payment_status` varchar(255) NOT NULL DEFAULT 'unpaid',
   `total_price` decimal(10,2) DEFAULT NULL,
   `notes` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `customer_id`, `room_id`, `check_in`, `check_out`, `check_in_time`, `check_out_time`, `guests`, `status`, `payment_status`, `total_price`, `notes`, `created_at`, `updated_at`) VALUES
+(2, 2, 1, '2026-05-25', '2026-05-28', NULL, NULL, 8, 'checked_in', 'unpaid', 75.00, NULL, '2026-05-23 12:51:50', '2026-05-23 12:52:40');
 
 -- --------------------------------------------------------
 
@@ -51,10 +59,24 @@ CREATE TABLE `bookings` (
 
 CREATE TABLE `customers` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `room` varchar(255) DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'active',
+  `address` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'active'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `photo`, `name`, `email`, `phone`, `room`, `status`, `address`, `created_at`, `updated_at`) VALUES
+(1, '1779564569.jpg', 'horng horng', 'horng160@gmail.com', '09796779172', NULL, 'Active', NULL, '2026-05-23 12:29:29', '2026-05-23 12:29:29'),
+(2, '1779564598.jpg', 'horng horng', 'hornghorng168@gmail.com', '09796779172', NULL, 'Active', NULL, '2026-05-23 12:29:45', '2026-05-23 12:29:58');
 
 -- --------------------------------------------------------
 
@@ -95,8 +117,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2026_05_14_032340_create_rooms_table', 1),
 (6, '2026_05_14_032439_create_customers_table', 1),
-(7, '2026_05_19_170438_create_bookings_table', 2),
-(8, '2026_05_19_171051_add_status_to_customers_table', 3);
+(7, '2026_05_19_170438_create_bookings_table', 1),
+(8, '2026_05_19_171051_add_status_to_customers_table', 2),
+(9, '2026_05_23_171312_add_room_and_photo_to_customers_table', 2),
+(10, '2026_05_23_181935_add_fields_to_rooms_table', 2),
+(11, '2026_05_23_182911_rename_price_column_in_rooms_table', 3),
+(12, '2026_05_23_185048_add_payment_status_to_bookings_table', 3),
+(13, '2026_05_23_193732_add_availability_to_rooms_table', 3);
 
 -- --------------------------------------------------------
 
@@ -137,9 +164,25 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `rooms` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `room_number` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `price_per_night` decimal(10,2) NOT NULL,
+  `capacity` int(11) NOT NULL,
+  `floor` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `availability` varchar(255) NOT NULL DEFAULT 'available'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rooms`
+--
+
+INSERT INTO `rooms` (`id`, `room_number`, `type`, `price_per_night`, `capacity`, `floor`, `status`, `description`, `created_at`, `updated_at`, `availability`) VALUES
+(1, '101', 'Standard', 25.00, 5, 44, 'Available', NULL, '2026-05-23 12:28:28', '2026-05-23 12:51:50', 'unavailable'),
+(2, '102', 'Deluxe', 55.00, 5, 55, 'Maintenance', 'New room', '2026-05-23 12:28:47', '2026-05-23 12:28:47', 'available');
 
 -- --------------------------------------------------------
 
@@ -174,7 +217,8 @@ ALTER TABLE `bookings`
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `customers_email_unique` (`email`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -207,7 +251,8 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `rooms_room_number_unique` (`room_number`);
 
 --
 -- Indexes for table `users`
@@ -224,13 +269,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -242,7 +287,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -254,7 +299,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

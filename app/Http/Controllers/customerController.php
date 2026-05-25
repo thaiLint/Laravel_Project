@@ -2,42 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $query = Customer::query();
+    $customers = Customer::paginate(10);
 
-        
-        if ($request->search) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('email', 'like', '%' . $request->search . '%')
-                  ->orWhere('phone', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        
-        if ($request->status) {
-            $query->where('status', $request->status);
-        }
-
-        $customers = $query->orderBy('id', 'desc')->paginate(10);
-
-        
-        $activeCount = Customer::where('status', 'active')->count();
-        $inactiveCount = Customer::where('status', 'inactive')->count();
-        $thisMonth = Customer::where('created_at', '>=', now()->startOfMonth())->count();
-
-        return view('customer.index', compact(
-            'customers',
-            'activeCount',
-            'inactiveCount',
-            'thisMonth'
-        ));
+        return view('customer.index', compact('customers'));
     }
 
     public function create()
@@ -47,35 +21,82 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        Customer::create($request->all());
+        $request->validate([
+    'name' => 'required',
+    'email' => 'required|email|unique:customers',
+    'phone' => 'required',
+    'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+]);
 
-        return redirect()->route('customers.index')
-            ->with('success', 'Customer created successfully');
+        $photoName = null;
+
+        if ($request->hasFile('photo')) {
+
+            $photoName = time() . '.' .
+                $request->photo->extension();
+
+           $request->photo->move(public_path('uploads/customer'), $photoName);
+            
+        }
+
+        Customer::create([
+        'name' => $request->name,   
+        'photo' => $photoName,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'room' => $request->room,
+        'status' => $request->status,
+    ]);
+
+    
+
+        return redirect()
+    ->route('customers.index')
+    ->with('success', 'Customer added successfully');
+    }
+    public function edit($id)
+{
+    $customer = Customer::findOrFail($id);
+
+    return view('customer.edit', compact('customer'));
+}
+public function update(Request $request, $id)
+{
+    $customer = Customer::findOrFail($id);
+
+    $photoName = $customer->photo;
+
+    if ($request->hasFile('photo')) {
+
+        $photoName = time() . '.' .
+            $request->photo->extension();
+
+        $request->photo->move(
+            public_path('uploads/customer'),
+            $photoName
+        );
     }
 
-    public function show(Customer $customer)
-    {
-        return view('customer.show', compact('customer'));
-    }
+    $customer->update([
+        'name' => $request->name,
+        'photo' => $photoName,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'room' => $request->room,
+        'status' => $request->status,
+    ]);
 
-    public function edit(Customer $customer)
-    {
-        return view('customer.edit', compact('customer'));
-    }
+    return redirect()
+        ->route('customers.index')
+        ->with('success', 'Customer updated successfully');
+}
+public function destroy($id)
+{
+    $customer = Customer::findOrFail($id);
+    $customer->delete();
 
-    public function update(Request $request, Customer $customer)
-    {
-        $customer->update($request->all());
-
-        return redirect()->route('customers.index')
-            ->with('success', 'Customer updated successfully');
-    }
-
-    public function destroy(Customer $customer)
-    {
-        $customer->delete();
-
-        return redirect()->route('customers.index')
-            ->with('success', 'Customer deleted successfully');
-    }
+    return redirect()
+        ->route('customers.index')
+        ->with('success', 'Customer deleted successfully');
+}
 }
